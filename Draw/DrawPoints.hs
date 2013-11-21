@@ -23,5 +23,8 @@ handleInputPoints event state
         | EventKey (SpecialKey KeySpace) Down _ _ <- event
         = trace (show $ state^.points) state
 
+        | EventKey (Char 'r') Down _ _ <- event
+        = state & points .~ []
+
         | otherwise
         = state
