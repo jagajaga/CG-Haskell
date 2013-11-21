@@ -2,6 +2,7 @@ module Main where
 
 import           Draw.DrawConvexHullAndrew
 import           Draw.DrawPoints
+import           Handle.HandleInputPoints
 import           State.State
 
 import           Graphics.Gloss

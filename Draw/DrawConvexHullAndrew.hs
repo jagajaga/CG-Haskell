@@ -1,4 +1,4 @@
-module Draw.DrawConvexHullAndrew where
+module Draw.DrawConvexHullAndrew(drawConvexHullAndrew) where
 
 import           Algorithms.ConvexHull.Andrew
 import           Control.Lens
@@ -11,4 +11,3 @@ drawConvexHullAndrew :: State -> Picture
 drawConvexHullAndrew state = Pictures ([drawPoints state] ++ [drawClosedLines $ (state & (points .~ convexHullPoints))])
     where
         convexHullPoints = convexHullAndrew $ state^.points
-        ---TODO drawLine function
