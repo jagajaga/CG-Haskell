@@ -1,4 +1,4 @@
-module Algorithms.PointInTriangle where
+module Algorithms.PointInTriangle(pointInTriangle) where
 
 import           Algorithms.Rotate
 import           Graphics.Gloss.Data.Point

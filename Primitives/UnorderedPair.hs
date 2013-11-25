@@ -1,4 +1,7 @@
-module Primitives.UnorderedPair where
+module Primitives.UnorderedPair(UnorderedPair,
+                                makeUnorderedPair,
+                                other,
+                                isElem) where
 
 import           Data.Hashable
 

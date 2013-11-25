@@ -1,10 +1,10 @@
-module Primitives.BoundBox where
+module Primitives.BoundBox(BoundBox, boundPoints) where
 
 import           Graphics.Gloss.Data.Point
 
 data BoundBox a = BoundBox !a !a !a !a
 
-boundPoints :: [Point] -> BoundBox
+boundPoints :: Ord a => [(a, a)] -> BoundBox a
 boundPoints ps =
   let
     xs = map fst ps
