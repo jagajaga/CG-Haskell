@@ -1,6 +1,6 @@
 module Algorithms.Rotate (clockwise) where
 
-import Graphics.Gloss.Data.Vector
+import           Graphics.Gloss.Data.Vector
 
 clockwise :: Vector -> Vector -> Vector -> Bool
 clockwise o a b = (a `sub` o) `cross` (b `sub` o) <= 0
