@@ -9,4 +9,4 @@ import           Primitives.Triangle
 import           State.State
 
 drawTrianulationDelauney :: State -> Picture
-drawTrianulationDelauney state = Pictures $ (drawPointsFromState state : map drawTriangle (triangulation $ state^.points))
+drawTrianulationDelauney state = Pictures $ drawPointsFromState state : map drawTriangle (triangulation $ state^.points)
