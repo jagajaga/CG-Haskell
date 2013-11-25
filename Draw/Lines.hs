@@ -1,4 +1,4 @@
-module Draw.DrawLines (drawPath, drawClosedLines, drawPathFromState, drawClosedLinesFromState) where
+module Draw.Lines (drawPath, drawClosedLines, drawPathFromState, drawClosedLinesFromState) where
 
 import           Control.Lens
 import           Graphics.Gloss
