@@ -1,4 +1,4 @@
-module Primitives.UnorderedPair(UnorderedPair,
+module Primitives.UnorderedPair(UnorderedPair (..),
                                 makeUnorderedPair,
                                 other,
                                 isElem) where
