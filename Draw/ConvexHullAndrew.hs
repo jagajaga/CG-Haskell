@@ -1,9 +1,9 @@
-module Draw.DrawConvexHullAndrew(drawConvexHullAndrew) where
+module Draw.ConvexHullAndrew(drawConvexHullAndrew) where
 
 import           Algorithms.ConvexHull.Andrew
 import           Control.Lens
-import           Draw.DrawLines
-import           Draw.DrawPoints(drawPointsFromState)
+import           Draw.Lines
+import           Draw.Points(drawPointsFromState)
 import           Graphics.Gloss
 import           State.State
 

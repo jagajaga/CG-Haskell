@@ -2,7 +2,7 @@ module Draw.TriangulationDelauney where
 
 import           Algorithms.Triangulation.Delaunay
 import           Control.Lens
-import           Draw.DrawPoints
+import           Draw.Points
 import           Draw.Triangle
 import           Graphics.Gloss
 import           Primitives.Triangle

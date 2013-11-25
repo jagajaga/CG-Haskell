@@ -1,4 +1,4 @@
-module Draw.DrawPoints (drawPoints, drawPointsFromState) where
+module Draw.Points (drawPoints, drawPointsFromState) where
 
 import           Control.Lens
 import           Graphics.Gloss

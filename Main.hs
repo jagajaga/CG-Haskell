@@ -1,7 +1,8 @@
 module Main where
 
-import           Draw.DrawConvexHullAndrew
-import           Draw.DrawPoints
+import           Draw.ConvexHullAndrew
+import           Draw.Points
+import           Draw.TriangulationDelauney
 import           Handle.HandleInputPoints
 import           State.State
 
@@ -14,7 +15,7 @@ initialState = State {
 }
 
 drawState :: State -> Picture
-drawState = drawConvexHullAndrew
+drawState = drawTrianulationDelauney
 
 updateState :: Float -> State -> State
 updateState _ = id
