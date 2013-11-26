@@ -5,6 +5,7 @@ import           Algorithms.Vectors
 import           Graphics.Gloss
 import           Primitives.BoundBox
 import           Primitives.Triangle
+import           Primitives.Triangulation
 import           Primitives.UnorderedPair
 
 import           Data.List
@@ -16,10 +17,6 @@ import qualified Data.HashSet               as HSet
 
 import           Data.Maybe                 (fromJust)
 
-type Triangulation = HashMap Point (HashSet (UnorderedPair Point))
-
-emptyTriangulation :: Triangulation
-emptyTriangulation = HMap.empty
 
 makeDelaunay :: Triangulation -> [Triangle] -> Triangulation
 makeDelaunay trig [] = trig
@@ -96,16 +93,19 @@ baseTriangulation pts = foldl' insertTriangle emptyTriangulation [makeTriangle p
         p3 = (xMax, yMin)
         p4 = (xMax, yMax)
 
+getTrianglesAndTriangulation :: Triangulation -> (Triangulation, [Triangle])
+getTrianglesAndTriangulation tr = (tr, triangulationToTriangles tr)
+
 triangulationToTriangles :: Triangulation -> [Triangle]
-triangulationToTriangles trig = concatMap (\(p1,nPts) -> map (\(UnorderedPair p2 p3) -> (p1,p2,p3)) (HSet.toList nPts)) ptsWithNeighbors
+triangulationToTriangles trig = nub $ map sortTrianglePoints $ concatMap (\(p1,nPts) -> map (\(UnorderedPair p2 p3) -> (p1,p2,p3)) (HSet.toList nPts)) ptsWithNeighbors
   where
     pts = HMap.keys trig
     ptsWithNeighbors = map (\pt -> (pt, trig HMap.! pt)) pts
 
-triangulation :: [Vector] -> [Triangle]
-triangulation [] = []
-triangulation pts' = case pts of
-    (_:_:_:_) -> nub $ map sortTrianglePoints $ triangulationToTriangles trig
-    _tooFew   -> []
+doTriangulation :: [Vector] -> (Triangulation, [Triangle])
+doTriangulation [] = (emptyTriangulation, [])
+doTriangulation pts' = case pts of
+    (_:_:_:_) ->  getTrianglesAndTriangulation trig
+    _tooFew   -> (emptyTriangulation, [])
   where trig = addPoints (baseTriangulation pts) pts
         pts  = nub pts'
