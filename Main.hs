@@ -11,7 +11,7 @@ import           Graphics.Gloss
 initialState :: State
 initialState = State {
    _points = []
-   ---TODO press state
+   --TODO press state
 }
 
 drawState :: State -> Picture
@@ -21,7 +21,6 @@ updateState :: Float -> State -> State
 updateState _ = id
 
 handleInput = handleInputPoints
-
 main :: IO ()
 main = play display black fps initialState drawState handleInput updateState
     where
