@@ -5,7 +5,10 @@ module Primitives.UnorderedPair(UnorderedPair (..),
 
 import           Data.Hashable
 
-data UnorderedPair a = UnorderedPair !a !a deriving (Show, Eq)
+data UnorderedPair a = UnorderedPair !a !a deriving (Eq)
+
+instance (Show a) => Show (UnorderedPair a) where
+      show (UnorderedPair a b) = "{" ++ (show a) ++ ", " ++ (show b) ++ "}"
 
 makeUnorderedPair :: (Ord a) => a -> a -> UnorderedPair a
 makeUnorderedPair a b
