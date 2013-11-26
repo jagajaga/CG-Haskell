@@ -16,7 +16,6 @@ import qualified Data.HashSet               as HSet
 
 import           Data.Maybe                 (fromJust)
 
-
 type Triangulation = HashMap Point (HashSet (UnorderedPair Point))
 
 emptyTriangulation :: Triangulation
@@ -44,9 +43,11 @@ flipEdge trig (a,b) c c' = (foldl' insertTriangle (foldl' deleteTriangle trig de
         deleteTriangles = [makeTriangle a b c, makeTriangle a b c']
 
 addPoint :: Triangulation -> Point -> Triangulation
-addPoint trig pt = makeDelaunay trig' splittedTriangles
+addPoint trig pt
+  | null tris = error "addPoint: no tris"
+  | otherwise = makeDelaunay trig' splittedTriangles
   where
-    potentialTriangles = triangulationToTriangles trig
+    potentialTriangles = nub $ map sortTrianglePoints $ triangulationToTriangles trig
     tris = filter (pointInTriangle pt) potentialTriangles
     tri = head tris
     (trig',(t1,t2,t3)) = splitTriangle trig tri pt
@@ -89,7 +90,7 @@ baseTriangulation :: [Point] -> Triangulation
 baseTriangulation pts = foldl' insertTriangle emptyTriangulation [makeTriangle p1 p2 p3, makeTriangle p2 p3 p4]
   where (BoundBox xMin' yMin' xMax' yMax') = boundPoints pts
         [xMin, yMin] = [xMin' - 1, yMin' - 1]
-        [xMax, yMax] = [xMax' + 1, yMax' + 1] --- hack  pts = [0 7, 24 33, 10 13, 20 0, 22 11]
+        [xMax, yMax] = [xMax' + 1, yMax' + 1]
         p1 = (xMin, yMin)
         p2 = (xMin, yMax)
         p3 = (xMax, yMin)
@@ -101,22 +102,10 @@ triangulationToTriangles trig = concatMap (\(p1,nPts) -> map (\(UnorderedPair p2
     pts = HMap.keys trig
     ptsWithNeighbors = map (\pt -> (pt, trig HMap.! pt)) pts
 
-removeHelperPoints :: [Point] -> Triangulation -> Triangulation
-removeHelperPoints pts trig = removeHelperPoints' (HMap.keys trig \\ pts) trig
-  where
-    removeHelperPoints' [] trig' = trig'
-    removeHelperPoints' (p:ps) trig' = case HMap.lookup p trig' of
-      Just neighbours -> removeHelperPoints' ps $
-                   HMap.delete p $
-                   HSet.foldl' (\trig'' (UnorderedPair nbor1 nbor2) -> HMap.adjust (HSet.filter (not . isElem p)) nbor1 $
-                                                  HMap.adjust (HSet.filter (not . isElem p)) nbor2 trig'')
-                   trig' neighbours
-      Nothing -> removeHelperPoints' ps trig'
-
 triangulation :: [Vector] -> [Triangle]
 triangulation [] = []
 triangulation pts' = case pts of
-    (_:_:_:_) -> triangulationToTriangles $ removeHelperPoints pts trig
+    (_:_:_:_) -> nub $ map sortTrianglePoints $ triangulationToTriangles trig
     _tooFew   -> []
   where trig = addPoints (baseTriangulation pts) pts
         pts  = nub pts'
