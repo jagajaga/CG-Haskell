@@ -3,7 +3,7 @@ module Draw.ConvexHullAndrew(drawConvexHullAndrew) where
 import           Algorithms.ConvexHull.Andrew
 import           Control.Lens
 import           Draw.Lines
-import           Draw.Points(drawPointsFromState)
+import           Draw.Points(drawPoints)
 import           Graphics.Gloss
 import           State.State
 
