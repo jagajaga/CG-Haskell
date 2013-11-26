@@ -1,17 +1,18 @@
 module Main where
 
-import           Draw.ConvexHullAndrew
-import           Draw.Points
 import           Draw.TriangulationDelauney
-import           Handle.HandleInputPoints
-import           State.State
+import           Handle.HandleInputDelaunay
+import           State.DelaunayState
 
 import           Graphics.Gloss
 
+import Data.HashMap.Strict (empty)
+
+
 initialState :: State
 initialState = State {
-   _points = []
-   --TODO press state
+   _points = [],
+   _triangulation = empty
 }
 
 drawState :: State -> Picture
@@ -20,7 +21,8 @@ drawState = drawTrianulationDelauney
 updateState :: Float -> State -> State
 updateState _ = id
 
-handleInput = handleInputPoints
+handleInput = handleInputDelaunay
+
 main :: IO ()
 main = play display black fps initialState drawState handleInput updateState
     where
