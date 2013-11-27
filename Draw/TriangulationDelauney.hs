@@ -2,23 +2,23 @@ module Draw.TriangulationDelauney where
 
 import           Algorithms.Triangulation.Delaunay
 import           Control.Lens
+import           Draw.Circule
 import           Draw.Points
 import           Draw.Triangle
-import           Draw.Circule
 import           Graphics.Gloss
+import           Primitives.BoundBox
 import           Primitives.Triangle
 import           State.DelaunayState
 
-import Debug.Trace
-import Data.List
+import           Data.List
+import           Debug.Trace
 
 drawTrianulationDelauney :: State -> Picture
-drawTrianulationDelauney state = Pictures $ drawPoints pts : map drawTriangle trig {-++ (map drawCirculeFromTriangle trig)-}
+drawTrianulationDelauney state = Pictures $ drawPoints pts : map drawTriangle triangles
     where
         pts = state^.points
-        trig = trace ("pts: " ++ (show $ state^.points) ++ " triangles: " ++ (show $ length $ triangles)) (triangles)
-        (a, triangles) = case length pts of 
-            x | x <= 3 -> doTriangulation $ state^.points 
-            otherwise -> (state^.triangulation, triangulationToTriangles $ state^.triangulation)
+        (a, triangles, b) = case length pts of
+            x | x <= 3 -> doTriangulation $ pts
+            otherwise -> (state^.triangulation, triangulationToTriangles $ state^.triangulation, state ^. boundBox)
 
 ---TODO draw normal visualisation

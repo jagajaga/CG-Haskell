@@ -109,7 +109,7 @@ doTriangulation [] = (emptyTriangulation, [], emptyBB)
 doTriangulation pts' = case pts of
     (_:_:_:_) ->  (\((a, b), c) -> (a, b, c)) $ (getTrianglesAndTriangulation trig, bb)
     _tooFew   -> (emptyTriangulation, [], emptyBB)
-  where 
-        (bb, baseTrig) = baseTriangulation pts 
+  where
+        (bb, baseTrig) = baseTriangulation pts
         trig = addPoints baseTrig pts
         pts  = nub pts'

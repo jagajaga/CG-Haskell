@@ -6,13 +6,11 @@ import           State.DelaunayState
 
 import           Graphics.Gloss
 
-import Data.HashMap.Strict (empty)
 
 
 initialState :: State
 initialState = State {
-   _points = [],
-   _triangulation = empty
+   _points = []
 }
 
 drawState :: State -> Picture

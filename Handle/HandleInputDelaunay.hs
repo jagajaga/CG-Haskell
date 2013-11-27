@@ -20,7 +20,7 @@ handleInputDelaunay event state
 
 
         | EventKey (SpecialKey KeySpace) Down _ _ <- event
-        = traceShow (state^.triangulation) state
+        = if not $ null $ state^.points then trace (("Triangles: ") ++ (show $ triangulationToTriangles $ state^.triangulation) ++ ("\r\n\r\n") ++ ("Points: ") ++ (show $ state^.points) ++ ("\r\n\r\n")) state else state
 
         | EventKey (Char 'r') Down _ _ <- event
         = state & points .~ []
