@@ -13,15 +13,15 @@ handleInputDelaunay event state
 
         | EventKey (MouseButton LeftButton) Down _ pt@(x,y) <- event
         = let addPointToState = points .~ (_init .~ (state^.points) $ [pt]) 
-              newTriangulation = addPoint (state^.triangulation) pt in 
-            case length $ state^.points of
+              newTriangulation = addPoint (state ^. triangulation) pt in 
+            case traceShow (length $ state^.points) (length $ state^.points) of
             x | x < 2 -> state & addPointToState
-            2 -> state & addPointToState  & triangulation .~ (fst $ doTriangulation $ state ^. points)
-            otherwise -> state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulation
+            2 -> (state & addPointToState) & (triangulation .~ (fst $ traceShow(doTriangulation $ state ^. points) (doTriangulation $ state^.points)))
+            otherwise -> traceShow (state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulation) (state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulatio)
 
 
         | EventKey (SpecialKey KeySpace) Down _ _ <- event
-        = trace (show $ state^.points) state
+        = traceShow (state^.triangulation) state
 
         | EventKey (Char 'r') Down _ _ <- event
         = state & points .~ []

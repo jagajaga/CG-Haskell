@@ -83,9 +83,9 @@ splitTriangle trig (p1, p2, p3) pt = (trig',(t1,t2,t3))
     t2 = makeTriangle p1 p3 pt
     t3 = makeTriangle p2 p3 pt
 
-baseTriangulation :: [Point] -> Triangulation
-baseTriangulation pts = foldl' insertTriangle emptyTriangulation [makeTriangle p1 p2 p3, makeTriangle p2 p3 p4]
-  where (BoundBox xMin' yMin' xMax' yMax') = boundPoints pts
+baseTriangulation :: [Point] -> (BoundBox Float, Triangulation)
+baseTriangulation pts = (bb, foldl' insertTriangle emptyTriangulation [makeTriangle p1 p2 p3, makeTriangle p2 p3 p4])
+  where bb@(BoundBox xMin' yMin' xMax' yMax') = boundPoints pts
         [xMin, yMin] = [xMin' - 1, yMin' - 1]
         [xMax, yMax] = [xMax' + 1, yMax' + 1]
         p1 = (xMin, yMin)
@@ -102,10 +102,14 @@ triangulationToTriangles trig = nub $ map sortTrianglePoints $ concatMap (\(p1,n
     pts = HMap.keys trig
     ptsWithNeighbors = map (\pt -> (pt, trig HMap.! pt)) pts
 
-doTriangulation :: [Vector] -> (Triangulation, [Triangle])
-doTriangulation [] = (emptyTriangulation, [])
+emptyBB = BoundBox 0 0 0 0
+
+doTriangulation :: [Vector] -> (Triangulation, [Triangle], BoundBox Float)
+doTriangulation [] = (emptyTriangulation, [], emptyBB)
 doTriangulation pts' = case pts of
-    (_:_:_:_) ->  getTrianglesAndTriangulation trig
-    _tooFew   -> (emptyTriangulation, [])
-  where trig = addPoints (baseTriangulation pts) pts
+    (_:_:_:_) ->  (\((a, b), c) -> (a, b, c)) $ (getTrianglesAndTriangulation trig, bb)
+    _tooFew   -> (emptyTriangulation, [], emptyBB)
+  where 
+        (bb, baseTrig) = baseTriangulation pts 
+        trig = addPoints baseTrig pts
         pts  = nub pts'
