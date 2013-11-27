@@ -4,20 +4,19 @@ import           Algorithms.Triangulation.Delaunay
 import           Control.Lens
 import           Debug.Trace
 import           Graphics.Gloss.Interface.Pure.Game
+import           Primitives.BoundBox
 import           State.DelaunayState
 
 handleInputDelaunay :: Event -> State -> State
 handleInputDelaunay event state
-        {-| EventMotion pt@(x, y) <- event-}
-        {-= state & points .~ (_init .~ (state^.points) $ [pt])        -}
-
         | EventKey (MouseButton LeftButton) Down _ pt@(x,y) <- event
-        = let addPointToState = points .~ (_init .~ (state^.points) $ [pt]) 
-              newTriangulation = addPoint (state ^. triangulation) pt in 
-            case traceShow (length $ state^.points) (length $ state^.points) of
+        = let addPointToState = points .~ (_init .~ (state^.points) $ [pt])
+              (trig, triangles, bb) = doTriangulation $ state^.points ++ [pt]
+              (newTriangulation, newBB) = if pointInBoundBox pt $ state^.boundBox then ((addPoint (state ^. triangulation) pt), state^.boundBox) else (trig, bb) in
+            case length $ state^.points of
             x | x < 2 -> state & addPointToState
-            2 -> (state & addPointToState) & (triangulation .~ (fst $ traceShow(doTriangulation $ state ^. points) (doTriangulation $ state^.points)))
-            otherwise -> traceShow (state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulation) (state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulatio)
+            2 -> state & addPointToState & triangulation .~ trig & boundBox .~ bb
+            otherwise -> state & points .~ (_init .~ (state^.points) $ [pt]) & triangulation .~ newTriangulation & boundBox .~ newBB
 
 
         | EventKey (SpecialKey KeySpace) Down _ _ <- event
