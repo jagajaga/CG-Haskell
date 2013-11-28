@@ -1,18 +1,18 @@
-Library written in haskell. Visualisations and algorithms.  
-Using Gloss library.
+### Library written in haskell.  
+#### Visualisations and algorithms.  
 
-Just 
+---
+
+Using [Gloss](http://hackage.haskell.org/package/gloss) library.  
+
+Installation using cabal:  
 ```
-ghc --make Main.hs
-```
+cabal install
+```  
 
-Dependencies:  
-1. lens  
-2. gloss  
-3. numeric-limits  
-4. unordered-containers  
+To test it, you can compile `Testing/Main.hs` using `ghc --make install`  
 
+---
 
-TODO:  
-+ Cabalise the project
+##### TODO:  
 + Code refactoring
