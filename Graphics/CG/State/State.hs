@@ -1,6 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE RecordWildCards #-}
-module State.State where
+module Graphics.CG.State.State where
 
 import           Control.Lens
 import           Graphics.Gloss
