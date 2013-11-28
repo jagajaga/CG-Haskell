@@ -1,8 +1,10 @@
 module Main where
 
-import           Draw.TriangulationDelauney
-import           Handle.HandleInputDelaunay
-import           State.DelaunayState
+import           Graphics.CG.Draw.TriangulationDelauney
+import           Graphics.CG.Handle.Delaunay
+import           Graphics.CG.State.DelaunayState
+import           Graphics.CG.State.DelaunayState
+
 
 import           Graphics.Gloss
 

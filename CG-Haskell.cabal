@@ -41,3 +41,8 @@ library
   build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2
   -- hs-source-dirs:      
   default-language:    Haskell2010
+
+executable CG-Visualisation 
+  main-is:             Testing/Main.hs
+  -- other-modules:       
+  build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2, CG-Haskell >=0.1.0.0
