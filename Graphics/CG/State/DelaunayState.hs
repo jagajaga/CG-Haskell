@@ -1,11 +1,11 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
-module State.DelaunayState where
+module Graphics.CG.State.DelaunayState where
 
 import           Control.Lens
+import           Graphics.CG.Primitives.BoundBox
+import           Graphics.CG.Primitives.Triangulation
 import           Graphics.Gloss.Data.Vector
-import           Primitives.BoundBox
-import           Primitives.Triangulation
 
 fst (a, _, _) = a
 snd (_, a, _) = a

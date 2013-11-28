@@ -1,5 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
-module Algorithms.Vectors where
+module Graphics.CG.Algorithms.Vectors where
 
 import           Graphics.Gloss.Data.Vector
 

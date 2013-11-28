@@ -1,4 +1,4 @@
-module Algorithms.Rotate (Rotate(..), orientation, clockwise) where
+module Graphics.CG.Algorithms.Rotate (Rotate(..), orientation, clockwise) where
 
 import           Graphics.Gloss.Data.Vector
 import           Numeric.Limits

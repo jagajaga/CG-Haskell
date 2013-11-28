@@ -1,9 +1,9 @@
-module Handle.HandleInputPoints (handleInputPoints) where
+module Graphics.CG.Handle.Points (handleInputPoints) where
 
 import           Control.Lens
 import           Debug.Trace
+import           Graphics.CG.State.State
 import           Graphics.Gloss.Interface.Pure.Game
-import           State.State
 
 handleInputPoints :: Event -> State -> State
 handleInputPoints event state

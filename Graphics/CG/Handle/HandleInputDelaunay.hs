@@ -1,11 +1,11 @@
-module Handle.HandleInputDelaunay (handleInputDelaunay) where
+module Graphics.CG.Handle.Delaunay (handleInputDelaunay) where
 
-import           Algorithms.Triangulation.Delaunay
 import           Control.Lens
 import           Debug.Trace
+import           Graphics.CG.Algorithms.Triangulation.Delaunay
+import           Graphics.CG.Primitives.BoundBox
+import           Graphics.CG.State.DelaunayState
 import           Graphics.Gloss.Interface.Pure.Game
-import           Primitives.BoundBox
-import           State.DelaunayState
 
 handleInputDelaunay :: Event -> State -> State
 handleInputDelaunay event state

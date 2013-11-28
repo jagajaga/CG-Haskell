@@ -1,11 +1,11 @@
-module Algorithms.ConvexHull.Andrew (convexHullAndrew) where
+module Graphics.CG.Algorithms.ConvexHull.Andrew (convexHullAndrew) where
 
-import           Algorithms.Rotate
-import           Data.List                  (sort)
+import           Data.List                     (sort)
+import           Graphics.CG.Algorithms.Rotate
 import           Graphics.Gloss.Data.Vector
 
 convexHullAndrew :: [Vector] -> [Vector]
-convexHullAndrew points = case points of 
+convexHullAndrew points = case points of
     [] -> []
     _ ->  upper ++ lower
     where

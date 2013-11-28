@@ -1,4 +1,4 @@
-module Draw.Points (drawPoints) where
+module Graphics.CG.Draw.Points (drawPoints ) where
 
 import           Control.Lens
 import           Graphics.Gloss

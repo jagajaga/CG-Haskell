@@ -1,4 +1,4 @@
-module Primitives.BoundBox(BoundBox (..), boundPoints, pointInBoundBox) where
+module Graphics.CG.Primitives.BoundBox(BoundBox (..), boundPoints, pointInBoundBox) where
 
 import           Graphics.Gloss.Data.Point
 

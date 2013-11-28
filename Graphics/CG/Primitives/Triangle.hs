@@ -1,4 +1,4 @@
-module Primitives.Triangle(Triangle, makeTriangle, sortTrianglePoints) where
+module Graphics.CG.Primitives.Triangle(Triangle, makeTriangle, sortTrianglePoints) where
 
 import           Data.List                 (sort)
 import           Graphics.Gloss.Data.Point

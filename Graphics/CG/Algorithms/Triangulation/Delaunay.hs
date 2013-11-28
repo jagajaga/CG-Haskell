@@ -1,21 +1,21 @@
-module Algorithms.Triangulation.Delaunay  where
+module Graphics.CG.Algorithms.Triangulation.Delaunay  where
 
-import           Algorithms.PointInTriangle
-import           Algorithms.Vectors
+import           Graphics.CG.Algorithms.PointInTriangle
+import           Graphics.CG.Algorithms.Vectors
+import           Graphics.CG.Primitives.BoundBox
+import           Graphics.CG.Primitives.Triangle
+import           Graphics.CG.Primitives.Triangulation
+import           Graphics.CG.Primitives.UnorderedPair
 import           Graphics.Gloss
-import           Primitives.BoundBox
-import           Primitives.Triangle
-import           Primitives.Triangulation
-import           Primitives.UnorderedPair
 
 import           Data.List
 
-import           Data.HashMap.Strict        (HashMap)
-import qualified Data.HashMap.Strict        as HMap
-import           Data.HashSet               (HashSet)
-import qualified Data.HashSet               as HSet
+import           Data.HashMap.Strict                    (HashMap)
+import qualified Data.HashMap.Strict                    as HMap
+import           Data.HashSet                           (HashSet)
+import qualified Data.HashSet                           as HSet
 
-import           Data.Maybe                 (fromJust)
+import           Data.Maybe                             (fromJust)
 
 
 makeDelaunay :: Triangulation -> [Triangle] -> Triangulation

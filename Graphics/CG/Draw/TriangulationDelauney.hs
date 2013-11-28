@@ -1,14 +1,14 @@
-module Draw.TriangulationDelauney where
+module Graphics.CG.Draw.TriangulationDelauney where
 
-import           Algorithms.Triangulation.Delaunay
 import           Control.Lens
-import           Draw.Circule
-import           Draw.Points
-import           Draw.Triangle
+import           Graphics.CG.Algorithms.Triangulation.Delaunay
+import           Graphics.CG.Draw.Circule
+import           Graphics.CG.Draw.Points
+import           Graphics.CG.Draw.Triangle
+import           Graphics.CG.Primitives.BoundBox
+import           Graphics.CG.Primitives.Triangle
+import           Graphics.CG.State.DelaunayState
 import           Graphics.Gloss
-import           Primitives.BoundBox
-import           Primitives.Triangle
-import           State.DelaunayState
 
 import           Data.List
 import           Debug.Trace
