@@ -7,10 +7,7 @@ import           Graphics.Gloss.Interface.Pure.Game
 
 handleInputPoints :: Event -> State -> State
 handleInputPoints event state
-        {-| EventMotion pt@(x, y) <- event-}
-        {-= state & points .~ (_init .~ (state^.points) $ [pt])        -}
-
-        | EventKey (MouseButton LeftButton) Down _ pt@(x,y) <- event
+        | EventKey (MouseButton LeftButton) Down _ pt@(_,_) <- event
         = state & points .~ (_init .~ (state^.points) $ [pt])
 
         | EventKey (SpecialKey KeySpace) Down _ _ <- event
