@@ -3,7 +3,7 @@
 
 ---
 
-Using [Gloss](http://hackage.haskell.org/package/gloss) library.  
+Uses [Gloss](http://hackage.haskell.org/package/gloss) library.  
 
 ---
 
