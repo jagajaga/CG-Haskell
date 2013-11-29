@@ -18,6 +18,14 @@ import qualified Data.HashSet                           as HSet
 import           Data.Maybe                             (fromJust)
 
 
+neighbors :: Triangulation -> Triangle -> [(Point, Triangle)]
+neighbors trig (p1',p2',p3') = findNeighbors p1' (p2',p3') ++ findNeighbors p2' (p1',p3') ++ findNeighbors p3' (p1',p2')
+  where findNeighbors p1 (p2,p3) = HSet.toList $ HSet.map fromJust $ HSet.delete Nothing $
+                                   HSet.map (\pr -> case (other p2 pr, other p3 pr) of
+                                                (Just p3'', Nothing) | p3 /= p3'' -> Just (p3, makeTriangle p1 p3'' p2)
+                                                (Nothing, Just p2'') | p2 /= p2'' -> Just (p2, makeTriangle p1 p2'' p3)
+                                                (_, _) -> Nothing) (trig HMap.! p1)
+
 makeDelaunay :: Triangulation -> [Triangle] -> Triangulation
 makeDelaunay trig [] = trig
 makeDelaunay triangulation (t:ts) =
@@ -50,17 +58,17 @@ addPoint trig pt
     (trig',(t1,t2,t3)) = splitTriangle trig tri pt
     splittedTriangles = [t1,t2,t3]
 
+splitTriangle :: Triangulation -> Triangle -> Point -> (Triangulation,(Triangle,Triangle,Triangle))
+splitTriangle trig (p1, p2, p3) pt = (trig',(t1,t2,t3))
+  where
+    trig' = foldl' insertTriangle (deleteTriangle trig (p1,p2,p3)) [t1,t2,t3]
+    t1 = makeTriangle p1 p2 pt
+    t2 = makeTriangle p1 p3 pt
+    t3 = makeTriangle p2 p3 pt
+
 addPoints :: Triangulation -> [Point] -> Triangulation
 addPoints trig [] = trig
 addPoints trig pts = foldl addPoint trig pts
-
-neighbors :: Triangulation -> Triangle -> [(Point, Triangle)]
-neighbors trig (p1',p2',p3') = findNeighbors p1' (p2',p3') ++ findNeighbors p2' (p1',p3') ++ findNeighbors p3' (p1',p2')
-  where findNeighbors p1 (p2,p3) = HSet.toList $ HSet.map fromJust $ HSet.delete Nothing $
-                                   HSet.map (\pr -> case (other p2 pr, other p3 pr) of
-                                                (Just p3'', Nothing) | p3 /= p3'' -> Just (p3, makeTriangle p1 p3'' p2)
-                                                (Nothing, Just p2'') | p2 /= p2'' -> Just (p2, makeTriangle p1 p2'' p3)
-                                                (_, _) -> Nothing) (trig HMap.! p1)
 
 insertTriangle :: Triangulation -> Triangle -> Triangulation
 insertTriangle neighbours (p1',p2',p3') = newTriangulation
@@ -74,14 +82,6 @@ deleteTriangle :: Triangulation -> Triangle -> Triangulation
 deleteTriangle trig (p1,p2,p3) =  HMap.adjust (HSet.delete $ makeUnorderedPair p2 p3) p1 $
                                   HMap.adjust (HSet.delete $ makeUnorderedPair p1 p3) p2 $
                                   HMap.adjust (HSet.delete $ makeUnorderedPair p1 p2) p3 trig
-
-splitTriangle :: Triangulation -> Triangle -> Point -> (Triangulation,(Triangle,Triangle,Triangle))
-splitTriangle trig (p1, p2, p3) pt = (trig',(t1,t2,t3))
-  where
-    trig' = foldl' insertTriangle (deleteTriangle trig (p1,p2,p3)) [t1,t2,t3]
-    t1 = makeTriangle p1 p2 pt
-    t2 = makeTriangle p1 p3 pt
-    t3 = makeTriangle p2 p3 pt
 
 baseTriangulation :: [Point] -> (BoundBox Float, Triangulation)
 baseTriangulation pts = (bb, foldl' insertTriangle emptyTriangulation [makeTriangle p1 p2 p3, makeTriangle p2 p3 p4])
