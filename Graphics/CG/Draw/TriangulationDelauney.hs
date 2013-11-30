@@ -2,7 +2,6 @@ module Graphics.CG.Draw.TriangulationDelauney where
 
 import           Control.Lens
 import           Graphics.CG.Algorithms.Triangulation.Delaunay
-import           Graphics.CG.Draw.Circule
 import           Graphics.CG.Draw.Points
 import           Graphics.CG.Draw.Triangle
 import           Graphics.CG.Primitives.BoundBox
