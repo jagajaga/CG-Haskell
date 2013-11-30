@@ -1,5 +1,6 @@
 ### Library written in haskell.  
 #### Visualisations and algorithms.  
+[![Build Status](https://travis-ci.org/jagajaga/CG-Haskell.png?branch=master)](https://travis-ci.org/jagajaga/CG-Haskell)
 
 ---
 
