@@ -22,7 +22,6 @@ library
                        Graphics.CG.Primitives.BoundBox,
                        Graphics.CG.Primitives.Triangle,
                        Graphics.CG.Draw.TriangulationDelauney,
-                       Graphics.CG.Draw.Circule,
                        Graphics.CG.Draw.Lines,
                        Graphics.CG.Draw.Triangle,
                        Graphics.CG.Draw.ConvexHullAndrew,
