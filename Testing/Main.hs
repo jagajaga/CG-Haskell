@@ -1,10 +1,9 @@
 module Main where
 
-import           Graphics.CG.Draw.TriangulationDelauney
-import           Graphics.CG.Handle.Delaunay
-import           Graphics.CG.State.DelaunayState
-import           Graphics.CG.State.DelaunayState
-
+import           Graphics.CG.Draw.BoundingBox
+import           Graphics.CG.Handle.Points
+import           Graphics.CG.State.State
+import           Graphics.CG.State.State
 
 import           Graphics.Gloss
 
@@ -16,12 +15,12 @@ initialState = State {
 }
 
 drawState :: State -> Picture
-drawState = drawTrianulationDelauney
+drawState = drawBoundingBox
 
 updateState :: Float -> State -> State
 updateState _ = id
 
-handleInput = handleInputDelaunay
+handleInput = handleInputPoints
 
 main :: IO ()
 main = play display black fps initialState drawState handleInput updateState

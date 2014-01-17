@@ -1,4 +1,4 @@
-module Graphics.CG.Algorithms.Rotate (Rotate(..), orientation, clockwise) where
+module Graphics.CG.Algorithms.Rotate (Rotate(..), orientation, clockwise, rotate, rotatePoints) where
 
 import           Graphics.Gloss.Data.Vector
 import           Numeric.Limits
@@ -35,3 +35,9 @@ cross (x1, y1) (x2, y2) = x1 * y2 - x2 * y1
 
 sub :: Vector -> Vector -> Vector
 sub (x1, y1) (x2, y2) = (x1 - x2, y1 - y2)
+
+rotate :: Vector -> Float -> Vector
+rotate v a = rotateV a v where
+
+rotatePoints :: [Vector] -> Vector -> Float -> [Vector]
+rotatePoints v c f = foldl (\acc p -> acc ++ [c + (rotate (p - c) f)]) [] v

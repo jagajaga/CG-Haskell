@@ -22,6 +22,7 @@ library
                        Graphics.CG.Primitives.BoundBox,
                        Graphics.CG.Primitives.Triangle,
                        Graphics.CG.Draw.TriangulationDelauney,
+                       Graphics.CG.Draw.BoundingBox,
                        Graphics.CG.Draw.Lines,
                        Graphics.CG.Draw.Triangle,
                        Graphics.CG.Draw.ConvexHullAndrew,
@@ -37,11 +38,11 @@ library
                        Graphics.CG.State.State
   -- other-modules:       
   other-extensions:    BangPatterns, RecordWildCards, TemplateHaskell
-  build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2
+  build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2, array >= 0.4
   -- hs-source-dirs:      
   default-language:    Haskell2010
 
 executable CG-Visualisation 
   main-is:             Testing/Main.hs
   -- other-modules:       
-  build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2, CG-Haskell >=0.1.0.0
+  build-depends:       base >=4.6 && <4.7, gloss >=1.8 && <1.9, hashable >=1.2 && <1.3, unordered-containers >=0.2 && <0.3, lens >=3.9 && <3.10, numeric-limits >=0.1 && <0.2, CG-Haskell >=0.1.0.0, array >= 0.4
